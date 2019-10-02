@@ -43,10 +43,18 @@ sudo apt -y install snapd
 sudo snap install code --classic
 sudo snap install spotify
 
-# PHP run
+# PHP runner
 sudo echo "#!/bin/sh
 
-docker run --rm -i --network=host -v "$HOME":"$HOME":ro -u $(id -u) -w "$PWD" php:7-alpine php "$@"
+docker run \
+    --rm \
+    -i \
+    --network=host \
+    -v "$HOME":"$HOME":ro \
+    -u $(id -u) \
+    -w "$PWD" \
+    php:7-alpine \
+    php "$@"
 
 exit $?" > /usr/local/bin/php
 
