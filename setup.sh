@@ -7,25 +7,19 @@ sudo update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 # Update system
 sudo apt-get update \
-    && sudo apt -y dist-upgrade \
-    && sudo apt autoclean \
-    && sudo apt -y autoremove \
-    && sudo apt clean
+    && sudo apt-get -y dist-upgrade \
+    && sudo apt-get autoclean \
+    && sudo apt-get autoremove \
+    && sudo apt-get clean
 
 # Utilities
-sudo apt install -y git openssh-client openssh-server tree htop curl
+sudo apt-get install -y git openssh-client openssh-server tree htop curl
 sudo bash /etc/bash_completion
 
-# Snap
-sudo apt install -y snapd
-sudo snap install code --classic
-sudo snap install gitkraken
-sudo snap install postman
-
 # Docker
-sudo apt remove -y docker docker-engine docker.io containerd runc
+sudo apt-get remove docker docker-engine docker.io containerd runc
 
-sudo apt install -y \
+sudo apt-get install \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -35,16 +29,31 @@ sudo apt install -y \
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-sudo apt update
-sudo apt -y install docker-ce docker-ce-cli containerd.io
+sudo apt-get update
+sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 sudo systemctl enable docker
 
-curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 
 sudo usermod -aG docker $USER
 
-echo "Launch VS Code Quick Open (Ctrl+P), paste the following command, and press enter."
-echo "ext install humao.rest-client equinusocio.vsc-material-theme ms-azuretools.vscode-docker editorconfig.editorconfig dbaeumer.vscode-eslint felixfbecker.php-debug felixfbecker.php-pack christian-kohler.path-intellisense felixfbecker.php-debug felixfbecker.php-pack ms-vscode.vscode-typescript-tslint-plugin wix.vscode-import-cost"
-echo "Please reboot your system"
+# Snaps
+sudo apt -y install snapd
+sudo snap install code --classic
+sudo snap install spotify
 
+# PHP run
+sudo echo "#!/bin/sh
+
+docker run --rm -i --network=host -v "$HOME":"$HOME":ro -u $(id -u) -w "$PWD" php:7-alpine php "$@"
+
+exit $?" > /usr/local/bin/php
+
+sudo chmod -R 777 /usr/local/bin/php
+
+# System
+sudo echo "fs.inotify.max_user_watches = 524288" > /etc/sysctl.d/99-custom.conf
+sudo sysctl -p --system
+
+echo "Please reboot your system"
