@@ -44,10 +44,10 @@ sudo snap install code --classic
 sudo snap install spotify
 
 # PHP runner
-sudo echo "#!/bin/sh
+sudo chown -R $(whoami) /usr/local
 
-docker run \
-    --rm \
+sudo echo '#!/bin/sh
+docker run --rm \
     -i \
     --network=host \
     -v "$HOME":"$HOME":ro \
@@ -55,10 +55,9 @@ docker run \
     -w "$PWD" \
     php:7-alpine \
     php "$@"
+exit $?' > /usr/local/bin/php
 
-exit $?" > /usr/local/bin/php
-
-sudo chmod -R 777 /usr/local/bin/php
+sudo chmod +x /usr/local/bin/php
 
 # System
 sudo echo "fs.inotify.max_user_watches = 524288" > /etc/sysctl.d/99-custom.conf
