@@ -14,10 +14,9 @@ sudo apt-get update \
 
 # Remove LibreOffice
 sudo apt-get remove --purge libreoffice*
-sudo apt-get clean
 
 # Utilities
-sudo apt-get install -y git openssh-client openssh-server tree htop curl
+sudo apt-get install -y git openssh-client openssh-server tree htop curl vim
 sudo bash /etc/bash_completion
 
 # Docker
