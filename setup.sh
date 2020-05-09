@@ -12,6 +12,10 @@ sudo apt-get update \
     && sudo apt-get autoremove \
     && sudo apt-get clean
 
+# Remove LibreOffice
+sudo apt-get remove --purge libreoffice*
+sudo apt-get clean
+
 # Utilities
 sudo apt-get install -y git openssh-client openssh-server tree htop curl
 sudo bash /etc/bash_completion
