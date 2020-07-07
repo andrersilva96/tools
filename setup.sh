@@ -22,7 +22,7 @@ sudo bash /etc/bash_completion
 # Docker
 sudo apt-get remove docker docker-engine docker.io containerd runc
 
-sudo apt-get install \
+sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -45,6 +45,7 @@ sudo usermod -aG docker $USER
 sudo apt -y install snapd
 sudo snap install code --classic
 sudo snap install spotify
+sudo snap install postman
 
 # PHP runner
 sudo chown -R $(whoami) /usr/local
@@ -65,5 +66,8 @@ sudo chmod +x /usr/local/bin/php
 # System
 sudo echo "fs.inotify.max_user_watches = 524288" > /etc/sysctl.d/99-custom.conf
 sudo sysctl -p --system
+
+# Adjust to dualboot
+timedatectl set-local-rtc 1 --adjust-system-clock
 
 echo "Please reboot your system"
