@@ -6,30 +6,37 @@ sudo apt-get update \
     && sudo apt-get clean
 
 # Utilities
-sudo apt-get install -y git tree htop curl vim run-one
+sudo apt-get install -y git tree htop curl vim run-one zip unzip software-properties-common
 
-# Docker
-sudo apt-get remove docker docker-engine docker.io containerd runc
+# Install Nginx
+sudo apt install -y nginx
 
-sudo apt-get -y install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
+# Install Mysql
+sudo apt install -y mysql-server
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+sudo mysql_secure_installation
 
-echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# Install PHP
+sudo apt install -y php-fpm php-mysql php-mbstring php-xml php-zip
 
-sudo apt-get update
+# Install Composer
+curl -sS https://getcomposer.org/installer -o composer-setup.php
 
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+HASH=`curl -sS https://composer.github.io/installer.sig`
 
-sudo docker run hello-world
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 
-# Docker Compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
+# Install Certbot
+sudo add-apt-repository ppa:certbot/certbot
+
+sudo apt install -y certbot python3-certbot-nginx
+
+sudo ufw enable
+
+sudo ufw allow 'Nginx Full'
+
+sudo ufw delete allow 'Nginx HTTP'
+
+sudo certbot renew --dry-run
