@@ -33,10 +33,4 @@ sudo add-apt-repository ppa:certbot/certbot
 
 sudo apt install -y certbot python3-certbot-nginx
 
-sudo ufw enable
-
-sudo ufw allow 'Nginx Full'
-
-sudo ufw delete allow 'Nginx HTTP'
-
 sudo certbot renew --dry-run
