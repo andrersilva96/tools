@@ -1,3 +1,11 @@
+#!/usr/bin/env bash
+
+echo "Enter your hostname."
+
+read host_name
+
+sudo hostnamectl set-hostname $host_name
+
 # Update system
 sudo apt-get update \
     && sudo apt-get -y dist-upgrade \
