@@ -42,3 +42,20 @@ sudo add-apt-repository ppa:certbot/certbot
 sudo apt install -y certbot python3-certbot-nginx
 
 sudo certbot renew --dry-run
+
+# Let www-data uses terminal
+sed -i "s/var\/www:\/usr\/sbin\/nologin/var\/www:\/bin\/bash/gi" /etc/passwd
+
+# Allow ssh to root and www-data
+echo 'AllowUsers root www-data' >> /etc/ssh/sshd_config
+
+# Create folder and set permission to www-data
+sudo mkdir -p /var/www/.ssh
+cp ~/.ssh/authorized_keys /var/www/.ssh/
+chmod 700 /var/www/.ssh
+chmod 600 /var/www/.ssh/authorized_keys
+sudo chown -R www-data:www-data /var/www
+
+# Restart ssh
+sudo systemctl restart sshd
+
