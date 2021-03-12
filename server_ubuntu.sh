@@ -56,6 +56,10 @@ chmod 700 /var/www/.ssh
 chmod 600 /var/www/.ssh/authorized_keys
 sudo chown -R www-data:www-data /var/www
 
+# Let www-data use nginx and certbot
+echo "www-data ALL=(ALL) NOPASSWD: /usr/sbin/nginx
+www-data ALL=(ALL) NOPASSWD: /usr/bin/certbot
+www-data ALL=(ALL) NOPASSWD: /bin/systemctl restart amplify-agent" >> /etc/sudoers/
+
 # Restart ssh
 sudo systemctl restart sshd
-
