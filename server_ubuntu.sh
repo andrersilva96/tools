@@ -6,6 +6,9 @@ read host_name
 
 sudo hostnamectl set-hostname $host_name
 
+# PHP Repository
+sudo add-apt-repository ppa:ondrej/php
+
 # Update system
 sudo apt-get update \
     && sudo apt-get -y dist-upgrade \
@@ -25,7 +28,8 @@ sudo apt install -y mysql-server
 sudo mysql_secure_installation
 
 # Install PHP
-sudo apt install -y php-fpm php-mysql php-mbstring php-xml php-zip
+sudo apt install -y php8.0-common php8.0-cli
+sudo apt install -y php8.0-{fpm,mysql,mbstring,xml,zip}
 
 # Install Composer
 curl -sS https://getcomposer.org/installer -o composer-setup.php
