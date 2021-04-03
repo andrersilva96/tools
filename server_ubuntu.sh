@@ -35,6 +35,7 @@ sudo certbot renew --dry-run
 sed -i "s/var\/www:\/usr\/sbin\/nologin/var\/www:\/bin\/bash/gi" /etc/passwd
 
 # Allow ssh to root and www-data
+sudo chmod 700 ~/.ssh
 echo 'AllowUsers root www-data' >> /etc/ssh/sshd_config
 
 # Create folder and set permission to www-data
