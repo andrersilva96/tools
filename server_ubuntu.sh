@@ -6,9 +6,6 @@ read host_name
 
 sudo hostnamectl set-hostname $host_name
 
-# PHP Repository
-sudo add-apt-repository ppa:ondrej/php
-
 # Update system
 sudo apt-get update \
     && sudo apt-get -y dist-upgrade \
@@ -26,19 +23,6 @@ sudo apt install -y nginx
 sudo apt install -y mysql-server
 
 sudo mysql_secure_installation
-
-# Install PHP
-sudo apt install -y php8.0-common php8.0-cli
-sudo apt install -y php8.0-{fpm,mysql,mbstring,xml,zip}
-
-# Install Composer
-curl -sS https://getcomposer.org/installer -o composer-setup.php
-
-HASH=`curl -sS https://composer.github.io/installer.sig`
-
-php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-
-sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 # Install Certbot
 sudo add-apt-repository ppa:certbot/certbot
@@ -67,3 +51,20 @@ www-data ALL=(ALL) NOPASSWD: /bin/systemctl restart amplify-agent" >> /etc/sudoe
 
 # Restart ssh
 sudo systemctl restart sshd
+
+# PHP Repository
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+
+# Install PHP
+sudo apt install -y php8.0-common php8.0-cli
+sudo apt install -y php8.0-{fpm,mysql,mbstring,xml,zip}
+
+# Install Composer
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+
+HASH=`curl -sS https://composer.github.io/installer.sig`
+
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
