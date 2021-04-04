@@ -59,7 +59,7 @@ sudo apt-get update
 
 # Install PHP
 sudo apt install -y php8.0-common php8.0-cli
-sudo apt install -y php8.0-{fpm,mysql,mbstring,xml,zip}
+sudo apt install -y php8.0-{fpm,mysql,mbstring,xml,zip,curl,com}
 
 # Install Composer
 curl -sS https://getcomposer.org/installer -o composer-setup.php
