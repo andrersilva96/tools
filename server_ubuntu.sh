@@ -16,6 +16,13 @@ sudo apt-get update \
 # Utilities
 sudo apt-get install -y git tree htop curl vim run-one zip unzip software-properties-common
 
+# Install Node V16
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs
+
+# Install Redis
+sudo apt install -y redis-server
+
 # Install Nginx
 sudo apt install -y nginx
 
@@ -70,9 +77,4 @@ php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Insta
 
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-# Install Node V16
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
-
-# Install Redis
-sudo apt install -y redis-server
+# If has any error from repository run sudo add-apt-repository --remove NAME_REPO_INSTALLED_FROM_THIS_SH
