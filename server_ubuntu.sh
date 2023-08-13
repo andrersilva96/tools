@@ -8,7 +8,7 @@ sudo hostnamectl set-hostname $host_name
 
 # Update system
 sudo apt-get update \
-    && sudo apt-get -y dist-upgrade \
+    # && sudo apt-get -y dist-upgrade \
     && sudo apt-get autoclean \
     && sudo apt-get autoremove \
     && sudo apt-get clean
