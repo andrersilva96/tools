@@ -14,7 +14,7 @@ sudo apt-get update \
     && sudo apt-get clean
 
 # Utilities
-sudo apt-get install -y git tree htop curl vim run-one zip unzip software-properties-common
+sudo apt-get install -y git tree htop curl vim run-one zip unzip software-properties-common snapd
 
 # Install Node V16
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
@@ -33,10 +33,9 @@ sudo apt install -y mysql-server
 sudo mysql_secure_installation
 
 # Install Certbot
-sudo add-apt-repository ppa:certbot/certbot
-
-sudo apt install -y certbot python3-certbot-nginx
-
+sudo snap install core
+sudo snap refresh core
+sudo snap install --classic certbot
 sudo certbot renew --dry-run
 
 # Let www-data uses terminal
