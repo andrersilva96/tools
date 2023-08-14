@@ -6,6 +6,8 @@ read host_name
 
 sudo hostnamectl set-hostname $host_name
 
+echo $(hostname -I | cut -d\  -f1) $host_name | sudo tee -a /etc/hosts
+
 # Update system
 sudo apt-get update \
     # && sudo apt-get -y dist-upgrade \
