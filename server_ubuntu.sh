@@ -80,3 +80,22 @@ php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Insta
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 # If has any error from repository run sudo add-apt-repository --remove NAME_REPO_INSTALLED_FROM_THIS_SH
+
+# TODO: Separate to new link that call this bellow
+echo "# Show git branch name
+force_color_prompt=yes
+color_prompt=yes
+parse_git_branch() {
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+if [ "$color_prompt" = yes ]; then
+	PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_branch)\[\033[00m\]\$ '
+else
+	PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
+fi
+unset color_prompt force_color_prompt
+
+alias dep='vendor/bin/dep'" >> /etc/profile.d/bash_profile.sh
+
+echo "set number" >> /root/.vimrc
+echo "set number" >> /var/www/.vimrc
