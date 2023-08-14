@@ -47,9 +47,14 @@ sed -i "s/var\/www:\/usr\/sbin\/nologin/var\/www:\/bin\/bash/gi" /etc/passwd
 sudo chmod 700 ~/.ssh
 echo 'AllowUsers root www-data' >> /etc/ssh/sshd_config
 
+# Generate sshkey
+ ssh-keygen -t rsa -b 4096 -N "$host_name server" -f ~/.ssh/id_rsa
+ 
 # Create folder and set permission to www-data
 sudo mkdir -p /var/www/.ssh
 cp ~/.ssh/authorized_keys /var/www/.ssh/
+cp ~/.ssh/id_rsa /var/www/.ssh/
+cp ~/.ssh/id_rsa.pub /var/www/.ssh/
 chmod 700 /var/www/.ssh
 chmod 600 /var/www/.ssh/authorized_keys
 sudo chown -R www-data:www-data /var/www
