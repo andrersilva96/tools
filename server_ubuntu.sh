@@ -23,8 +23,9 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 sudo apt install -y npm
 
-# Install yarn to deployer works
+# Install to deployer works
 npm install --global yarn
+sudo apt-get install -y acl
 
 # Install Redis
 sudo apt install -y redis-server
