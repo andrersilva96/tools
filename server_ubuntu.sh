@@ -105,8 +105,7 @@ fi
 unset color_prompt force_color_prompt
 
 alias p='php'
-alias pa='php artisan'
-alias dep='vendor/bin/dep'" >> /etc/profile.d/bash_profile.sh
+alias a='php artisan'" >> /etc/profile.d/bash_profile.sh
 
 echo "set number" >> /root/.vimrc
 echo "set number" >> /var/www/.vimrc
