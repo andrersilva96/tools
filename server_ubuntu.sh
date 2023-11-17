@@ -88,6 +88,10 @@ php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Insta
 
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
+# Install packages to optimize images on Laravel Spatie
+sudo apt-get install -y jpegoptim optipng pngquant gifsicle webp libavif-bin
+sudo npm install -g svgo
+
 # If has any error from repository run sudo add-apt-repository --remove NAME_REPO_INSTALLED_FROM_THIS_SH
 
 # TODO: Separate to new link that call this bellow
