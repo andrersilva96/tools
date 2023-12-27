@@ -77,6 +77,7 @@ www-data ALL=(ALL) NOPASSWD: /bin/systemctl restart amplify-agent" >> /etc/sudoe
 
 # Restart ssh
 sudo systemctl restart sshd
+sudo systemctl restart ssh.service
 
 # PHP Repository
 sudo add-apt-repository ppa:ondrej/php
