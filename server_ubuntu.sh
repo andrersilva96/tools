@@ -82,6 +82,8 @@ sudo systemctl restart ssh.service
 # PHP Repository
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
+# Case something goes wrong
+# https://dev.to/pallade/ppaondrejphp-on-ubuntu-2304-lunar-ia1 
 
 # Install PHP V8.1
 sudo apt install -y php8.2-common php8.2-cli
